@@ -50,7 +50,7 @@ Este projeto implementa um serviço de "pedidos" que gerencia e calcula o valor 
 
 1. Clone o repositório:
    ```bash
-   git clone https://github.com/seuusuario/servico-gerenciamento-pedidos.git
+   git clone https://github.com/rodrigorib5/external-p-a.git
     ```
 2. Acesse o diretório do projeto:
 3. Execute o comando:
