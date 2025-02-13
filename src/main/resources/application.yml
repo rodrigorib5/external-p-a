@@ -1,0 +1,51 @@
+spring:
+  application:
+    name: external-product-a
+
+  rabbitmq:
+    exchange: ex.orders.message
+    queue:
+      agenda:
+        message:
+          collect: q.orders.message-collect
+      deadLetter: dl.orders.message
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+
+  datasource:
+    url: jdbc:mysql://mysql:3306/testdb?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+    username: root
+    password: rootpassword
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+
+resilience4j:
+  retry:
+    configs:
+      default:
+        maxAttempts: 3
+        waitDuration: 5s
+        enableExponentialBackoff: true
+        exponentialBackoffMultiplier: 2
+        retryExceptions:
+          - org.springframework.dao.DataAccessException
+          - java.sql.SQLException
+
+springdoc:
+  packages-to-scan:
+    - com.empresa.producta.controller
+  swagger-ui:
+    path: /swagger-ui.html
+    tags-sorter: alpha
+    operations-sorter: alpha
+  api-docs:
+    path: /v3/api-docs
+  default-consumes-media-type: application/json
+  default-produces-media-type: application/json
